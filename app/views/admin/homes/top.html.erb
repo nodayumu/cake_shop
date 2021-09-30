@@ -1,0 +1,7 @@
+<h2>管理者画面トップページです</h2>
+<br>
+<p class="text-success"><%= flash[:notice] %></p>
+<br>
+<% unless admin_signed_in? %>
+  <%= link_to "管理者ログイン", new_admin_session_path, class: 'btn btn-success' %>
+<% end %>
