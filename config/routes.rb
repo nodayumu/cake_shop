@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     get '/', to: 'homes#top'
     resources :end_users, only: [:index]
     resources :items, except: [:destroy]
+    resources :genres, only: [:index, :create, :edit, :update]
   end
 
 end
