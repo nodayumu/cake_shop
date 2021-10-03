@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   root 'homes#top'
   get 'about' => 'homes#about'
 
-
   devise_for :admin, controllers: {
     sessions: 'admin/sessions',
     passwords: 'admin/passwords',
@@ -16,7 +15,7 @@ Rails.application.routes.draw do
     registrations: 'end_users/registrations'
   }
 
-  resources :end_users, only: [:show, :edit, :update, :destroy] do
+  resources :end_users, only: [:show, :edit, :update] do
     member do
       get :quit_confirm
     end

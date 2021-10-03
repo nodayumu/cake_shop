@@ -1,5 +1,5 @@
 class EndUsersController < ApplicationController
-  
+
   before_action :authenticate_end_user!
 
   def show
@@ -25,7 +25,6 @@ class EndUsersController < ApplicationController
 
   def hide
     @end_user = EndUser.find(params[:end_user_id])
-    # @end_user.update(is_active: false)
     @end_user.update(is_deleted: true)
     reset_session
     flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
@@ -43,9 +42,8 @@ class EndUsersController < ApplicationController
       :postal_code,
       :address,
       :phone_number,
-      :email,
-      :is_active
+      :email
     )
   end
-  
+
 end

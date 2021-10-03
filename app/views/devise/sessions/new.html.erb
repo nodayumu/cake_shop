@@ -1,6 +1,7 @@
 <h2>Log in</h2>
 
-<%= flash[:error] %>
+<p class="text-danger"><%= flash[:withdrawal] %></p>
+<p class="text-secondary"><%= flash[:error] %></p>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 

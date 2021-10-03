@@ -31,7 +31,7 @@ class DeviseCreateEndUsers < ActiveRecord::Migration[5.2]
       # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
-      
+
       t.string :last_name, null: false
       t.string :first_name, null: false
       t.string :last_name_kana, null: false
@@ -40,7 +40,7 @@ class DeviseCreateEndUsers < ActiveRecord::Migration[5.2]
       t.string :address, null: false
       t.string :phone_number, null: false
       t.boolean :is_deleted, default: false, null: false
-      #　↑ 追加
+      #　↑ 追加 defaultをtrueではなくfalseとする  true = 退会済み  false = 有効
 
       t.timestamps null: false
     end
