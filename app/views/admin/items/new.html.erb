@@ -4,6 +4,8 @@
 
       <h2>商品新規登録</h2>
 
+      <%= render 'layouts/errors', obj: @item %>
+
       <%= form_with model: @item, url: '/admin/items', local: true, method: :post do |f| %>
         <label>商品画像</label><br>
         <%= f.attachment_field :image %><br>

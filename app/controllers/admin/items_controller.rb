@@ -14,9 +14,12 @@ class Admin::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.save
-    flash[:notice] = '商品を新規登録しました'
-    redirect_to admin_item_path(@item.id)
+    if @item.save
+      flash[:notice] = '商品を新規登録しました'
+      redirect_to admin_item_path(@item.id)
+    else
+      render :new
+    end
   end
 
   def edit

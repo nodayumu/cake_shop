@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
     when Admin
       admin_path
     when EndUser
+      flash[:welcome] = "#{current_end_user.last_name} さん、ようこそ"
       end_user_path(current_end_user.id)
     end
   end

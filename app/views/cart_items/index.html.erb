@@ -4,7 +4,7 @@
 
       <h2>ショッピングカート</h2>
       <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, 'data-confirm' => '空にしますか？' %>
-      
+
       <table class="table">
         <thead>
           <tr>
@@ -44,9 +44,10 @@
           <% end %>
         </tbody>
       </table>
-      
-      <%= link_to "買い物を続ける", root_path %>
-      
+      <br>
+      <%= link_to "情報入力へ進む/リンク不要", root_path, class: 'btn btn-primary' %>
+      <%= link_to "買い物を続ける", root_path, class: 'btn btn-success' %>
+
     </div>
   </div>
 </div>
