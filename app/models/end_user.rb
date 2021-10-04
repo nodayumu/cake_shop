@@ -13,4 +13,6 @@ class EndUser < ApplicationRecord
    	#且つ、退会済みのユーザーを弾く　selfは、ここではEndUserモデルを指す
   end
 
+  has_many :cart_items, dependent: :destroy
+
 end

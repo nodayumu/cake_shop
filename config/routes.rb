@@ -24,6 +24,12 @@ Rails.application.routes.draw do
 
   resources :items, only: [:index, :show]
 
+  resources :cart_items, only: [:index, :update, :destroy, :create] do
+    collection do
+      delete :destroy_all
+    end
+  end
+
   namespace :admin do
     get '/', to: 'homes#top'
     resources :end_users, only: [:index]
