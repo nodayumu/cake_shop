@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :addresses, only: [:index, :create, :edit, :update]
+
   namespace :admin do
     get '/', to: 'homes#top'
     resources :end_users, only: [:index]

@@ -25,13 +25,21 @@ class CartItemsController < ApplicationController
 
 
   def create
-    @cart_item = CartItem.new(cart_item_params)
-    @cart_item.end_user_id = current_end_user.id
-    @cart_item.save
-    redirect_to cart_items_path
+    if current_end_user.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
+    #　例  if CartItem.find_by(CartItemモデルのitem_idが1番の"イチゴケーキ": 商品詳細でポチったのが、CartItemモデルのitem_idが1番の"イチゴケーキ").既に存在していたら
+      cart_item = current_end_user.cart_items.find_by(item_id: params[:cart_item][:item_id])
+      new_amount = cart_item.amount + params[:cart_item][:amount].to_i
+    #  find_byで特定してきた商品の、既にカート内にある数　+　新たにポチった数(CartItemモデルのamountカラム)
+    #  to_iメソッドで文字列型から整数型に変換　ないとTypeError吐く
+      cart_item.update(amount: new_amount)
+    else
+      cart_item = CartItem.new(cart_item_params)
+      cart_item.save
+    end
+    redirect_to cart_items_path, notice: "カートに追加しました"
   end
-
-
+  
+  
   private
 
   def cart_item_params

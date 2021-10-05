@@ -1,12 +1,9 @@
 <div class="container">
-
   <div class="row">
     <div class="col-md-6">
 
       <h2>マイページ</h2>
-      <br>
       <p class="text-success"><%= flash[:notice] %></p>
-      <br>
       <p class="text-success"><%= flash[:welcome] %></p>
 
       <div class="info my-5">
@@ -74,7 +71,7 @@
 
       <div class="shipping my-5">
         <h4>配送先</h4>
-        <%= link_to "配送先住所を選択する", root_path %>
+        <%= link_to "配送先一覧", addresses_path %>
       </div>
 
       <div class="order-history my-5">
@@ -84,5 +81,4 @@
 
     </div>
   </div>
-
 </div>

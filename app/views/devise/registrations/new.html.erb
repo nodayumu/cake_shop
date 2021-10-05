@@ -2,7 +2,7 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-  
+
   <div class="field">
     <%= f.label :姓 %><br />
     <%= f.text_field :last_name, autofocus: true, class: 'name' %>
@@ -35,7 +35,7 @@
 
   <div class="field">
     <%= f.label :電話番号 %><br />
-    <%= f.text_field :phone_number, autofocus: true, class: 'phone_number' %>
+    <%= f.telephone_field :phone_number, autofocus: true, class: 'phone_number' %>
   </div>
 
 

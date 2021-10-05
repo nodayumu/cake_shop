@@ -3,7 +3,12 @@
     <div class="col-9">
 
       <h2>ショッピングカート</h2>
-      <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, 'data-confirm' => '空にしますか？' %>
+
+      <div class="all-empty my-4">
+        <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, 'data-confirm' => '空にしますか？' %>
+      </div>
+
+      <p class="text-success"><%= flash[:notice] %></p>
 
       <table class="table">
         <thead>
@@ -17,6 +22,7 @@
           </tr>
         </thead>
         <tbody>
+          <% @sum = 0 %>
           <% @cart_items.each do |cart_item| %>
             <tr>
               <td>
@@ -35,16 +41,21 @@
                 <% end %>
               </td>
               <td>
-                <%= ((cart_item.item.non_taxed_price*1.1).round * cart_item.amount) %>
+                <%= (cart_item.item.non_taxed_price * 1.1).round * cart_item.amount %>
               </td>
               <td>
                 <%= link_to "削除", cart_item_path(cart_item.id), method: :delete %>
               </td>
+              <% @sum += (cart_item.item.non_taxed_price * 1.1).round * cart_item.amount %>
             </tr>
           <% end %>
         </tbody>
       </table>
-      <br>
+
+      <div class="sum my-5">
+        <h4>合計金額  <%= @sum %>円</h4>
+      </div>
+
       <%= link_to "情報入力へ進む/リンク不要", root_path, class: 'btn btn-primary' %>
       <%= link_to "買い物を続ける", root_path, class: 'btn btn-success' %>
 
