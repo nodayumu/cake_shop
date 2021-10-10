@@ -32,11 +32,22 @@ Rails.application.routes.draw do
 
   resources :addresses, only: [:index, :create, :edit, :update]
 
+  resources :orders, only: [:new, :create] do
+    collection do
+      post :confirm
+      get :complete
+    end
+  end
+
+
   namespace :admin do
     get '/', to: 'homes#top'
     resources :end_users, only: [:index]
     resources :items, except: [:destroy]
     resources :genres, only: [:index, :create, :edit, :update]
+
+    resources :orders, only: [:index, :show, :update]
+    resources :order_details, only: [:update]
   end
 
 end

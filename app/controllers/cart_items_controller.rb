@@ -36,10 +36,10 @@ class CartItemsController < ApplicationController
       cart_item = CartItem.new(cart_item_params)
       cart_item.save
     end
-    redirect_to cart_items_path, notice: "カートに追加しました"
+    redirect_to cart_items_path
   end
-  
-  
+
+
   private
 
   def cart_item_params
