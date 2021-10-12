@@ -1,5 +1,9 @@
 class OrdersController < ApplicationController
 
+  def index
+    @orders = current_end_user.orders
+  end
+
   def new
     @order = Order.new
     @cart_items = current_end_user.cart_items
@@ -14,6 +18,11 @@ class OrdersController < ApplicationController
       redirect_to cart_items_path, alert: "カートに商品が入っておりません"
     end
 
+    # @addresses = current_end_user.addresses
+    # if @addresses.empty?
+    #   redirect_to new_order_path
+    # end
+
     @order = Order.new
     @order.payment_method = params[:order][:payment_method]
 
@@ -25,11 +34,16 @@ class OrdersController < ApplicationController
       @order.name = current_end_user.last_name + current_end_user.first_name
       # Orderモデルのnameカラム = 現在ログインしているユーザー(EndUserモデル)のlast_nameカラムとfirst_nameカラム
     elsif params[:order][:address_option] == "1"
-      # @address = Address.find(params[:order][:address_id])
-      @address = Address.find_by(id: params[:order][:address_id])
-      @order.postal_code = @address.postal_code
-      @order.address = @address.address
-      @order.name = @address.name
+      # if @address = Address.find(params[:order][:address_id])
+      # if @address = Address.find_by(id: params[:order][:address_id])
+      if @address = Address.find_by(id: params[:address][:id])
+        @order.postal_code = @address.postal_code
+        @order.address = @address.address
+        @order.name = @address.name
+      else
+        render :new
+      end
+
     elsif params[:order][:address_option] == "2"
 			@order.postal_code = params[:order][:postal_code]
 			@order.address = params[:order][:address]
@@ -39,9 +53,9 @@ class OrdersController < ApplicationController
 
   def complete
     @cart_items = current_end_user.cart_items
-    if @cart_items.empty?
-      redirect_to cart_items_path, alert: "カートに商品が入っておりません"
-    end
+    # if @cart_items.empty?
+    #   redirect_to cart_items_path, alert: "カートに商品が入っておりません"
+    # end
   end
 
 
@@ -50,7 +64,9 @@ class OrdersController < ApplicationController
     @order.end_user_id = current_end_user.id
     @order.shipping_cost = 800
     @order.billing_amount = 0
-    # @order関連は70,71行目に追記(eachメソッドが絡むため)
+    # @order関連は82,83行目に追記(eachメソッドが絡むため)
+    @order.save
+    # 83行目の @order.save だけだと請求合計金額(billing_amount)が合わなくなる
 
     @cart_items = current_end_user.cart_items
     @cart_items.each do |cart_item|
@@ -64,12 +80,34 @@ class OrdersController < ApplicationController
       order_detail.save
 
       @order.billing_amount += (cart_item.item.non_taxed_price * 1.1).round * cart_item.amount
+      # @order.billing_amount = @order.billing_amount + @order.shipping_cost
       @order.save
     end
 
-    # @cart_items.destroy_all
+    @cart_items.destroy_all
     redirect_to complete_orders_path
   end
+
+  # def create
+  #   @order = Order.new(session[:order])
+  #   @order.end_user_id = current_end_user.id
+  #   @order.save
+
+  #   @cart_item = CartItem.where(end_user_id: current_end_user.id)
+
+  #   @cart_item.each do |order_item|
+  #     @order_item = OrderItem.new({
+  #       order_id: @order.id,
+  #       item_id: order_item.item_id,
+  #       amount: order_item.amount,
+  #       price: order_item.item.non_taxed_price
+  #     })
+  #     @order_item.save
+  #   end
+
+  #   @cart_items.destroy_all
+  #   redirect_to complete_orders_path
+  # end
 
 
   private

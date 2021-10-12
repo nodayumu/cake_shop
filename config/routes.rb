@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   resources :addresses, only: [:index, :create, :edit, :update]
 
-  resources :orders, only: [:new, :create] do
+  resources :orders, only: [:index, :new, :create] do
     collection do
       post :confirm
       get :complete

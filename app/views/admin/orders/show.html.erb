@@ -3,29 +3,35 @@
 
   <div class="row">
 
-    <div class="col-4">
+    <div class="col-4 mt-3">
 
-      <div class="user-name">
+      <div class="user-name my-3">
         <label>購入者</label>
         <%= @order.end_user.last_name %>  <%= @order.end_user.first_name %>
       </div>
 
-      <div class="shipping">
+      <div class="shipping my-3">
         <label>配送先</label>
-        <%= @order.postal_code %>
+        <%= "〒" + @order.postal_code %>
         <%= @order.address %>
         <br>
         <%= @order.name %>
       </div>
 
-      <div class="payment">
+      <div class="payment my-3">
         <label>お支払い方法</label>
         <%= @order.payment_method_i18n %>
       </div>
 
       <div class="order-status">
         <label>注文ステータス</label>
-        <!--オーダーステータス-->
+        <!--注文ステータス-->
+        <!--プルダウン表記でステータスを変更-->
+        <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
+          <%#= f.select :order_status, { pay_waiting: 0, pay_confirm: 1, on_making: 2, ship_preparing: 3, completed: 4 }, include_blank: "選択して下さい" %>
+          <%= f.select :order_status, Order.order_statuses.keys.map{|k| [I18n.t("enums.order.order_status.#{k}"), k]} %>
+          <%= f.submit "更新" %>
+        <% end %>
       </div>
 
     </div>
@@ -58,6 +64,12 @@
               <td><%= (order_detail.item.non_taxed_price * 1.1).round * order_detail.amount %></td>
               <td>
                 <!--製作ステータス-->
+                <!--プルダウン表記でステータスを変更-->
+                <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id), method: :patch, local: true do |f| %>
+                  <%#= f.select :making_status, { unable: 0, make_waiting: 1, making: 2, completed: 3 }, include_blank: "選択して下さい" %>
+                  <%= f.select :making_status, OrderDetail.making_statuses.keys.map{|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
+                  <%= f.submit "更新" %>
+                <% end %>
               </td>
               <% @sum += (order_detail.item.non_taxed_price * 1.1).round * order_detail.amount %>
             </tr>

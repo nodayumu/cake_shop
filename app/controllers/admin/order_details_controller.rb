@@ -7,7 +7,8 @@ class Admin::OrderDetailsController < ApplicationController
     @order = @order_detail.order
 
     if params[:order_detail][:making_status] == "making"
-      @order.update_all(order_status: "on_making")
+      # 注文商品の製作ステータスが1つでも"製作中"になったら、注文ステータスを"製作中"に更新
+      @order.update(order_status: "on_making")
     end
 
     count = 0
@@ -20,8 +21,9 @@ class Admin::OrderDetailsController < ApplicationController
     end
 
     if @order_details.count == count
-      # 個数を数えるcountメソッドを利用。右辺のcountは13、18行目に記述あり。
-      @order.update_all(order_status: "ship_preparing")
+      # 個数を数えるcountメソッドを利用。右辺のcountは14、19行目に記述あり(ステータスがcompletedになった注文商品の数)
+      # 注文商品全ての製作ステータスが"製作完了"になったら、注文ステータスを"発送準備中"に更新
+      @order.update(order_status: "ship_preparing")
     end
 
     redirect_to admin_order_path(@order.id)
