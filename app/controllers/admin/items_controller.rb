@@ -3,7 +3,8 @@ class Admin::ItemsController < ApplicationController
   before_action :authenticate_admin!, only: [:index, :show, :new, :edit]
 
   def index
-    @items = Item.all
+    @items = Item.search(params[:search])
+    # .searchメソッドは自作のメソッド。このままだと NoMethodError 吐く。モデル(item.rb)に記述。
   end
 
   def show
@@ -30,8 +31,11 @@ class Admin::ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    @item.update(item_params)
-    redirect_to admin_item_path(@item.id)
+    if @item.update(item_params)
+      redirect_to admin_item_path(@item.id)
+    else
+      render :edit
+    end
   end
 
   private

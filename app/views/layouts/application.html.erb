@@ -42,6 +42,12 @@
               </li>
 
             <% elsif admin_signed_in? %>
+              <li class="mr-5">
+                <%= form_tag(admin_items_path, :method => 'get') do %>
+                  <%= text_field_tag :search %>
+                  <%= submit_tag 'Search', :item_name => nil %>
+                <% end %>
+              </li>
               <li>
                 <%= link_to "商品一覧", admin_items_path, class: 'mr-3 text-light' %>
               </li>
