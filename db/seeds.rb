@@ -48,3 +48,62 @@ Item.create!(
   image: open('./app/assets/images/soda.jpg'),
   non_taxed_price: 150
 )
+
+
+EndUser.create!(
+  email: 's@s',
+  password: 'ssssss',
+  last_name: '佐藤',
+  first_name: '太郎',
+  last_name_kana: 'サトウ',
+  first_name_kana: 'タロウ',
+  postal_code: '399-9422',
+  address: '長野県北安曇郡小谷村千国乙12840-1',
+  phone_number: '111-1111-1111'
+)
+
+EndUser.create!(
+  email: 't@t',
+  password: 'tttttt',
+  last_name: '田中',
+  first_name: '二郎',
+  last_name_kana: 'タナカ',
+  first_name_kana: 'ジロウ',
+  postal_code: '381-0405',
+  address: '長野県下高井郡山ノ内町夜間瀬11700',
+  phone_number: '222-2222-2222'
+)
+
+EndUser.create!(
+  email: 'y@y',
+  password: 'yyyyyy',
+  last_name: '山田',
+  first_name: '三郎',
+  last_name_kana: 'ヤマダ',
+  first_name_kana: 'サブロウ',
+  postal_code: '389-2502',
+  address: '長野県下高井郡野沢温泉村豊郷7653',
+  phone_number: '333-3333-3333'
+)
+
+
+Address.create!(
+   end_user_id: 1,
+   name: '佐藤太郎(貸別荘)',
+   postal_code: '384-0703',
+   address: '長野県南佐久郡佐久穂町千代里2093-15'
+)
+
+Address.create!(
+   end_user_id: 2,
+   name: '田中二郎(貸別荘)',
+   postal_code: '399-9422',
+   address: '長野県北安曇郡小谷村千国乙12860-1'
+)
+
+Address.create!(
+   end_user_id: 3,
+   name: '山田三郎(貸別荘)',
+   postal_code: '386-2204',
+   address: '長野県上田市菅平高原1223-3433'
+)
