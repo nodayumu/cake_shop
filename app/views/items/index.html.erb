@@ -2,14 +2,29 @@
   <div class="row">
     <div class="col-9">
 
-      <h2>商品一覧</h2>
+      <h2>商品一覧  全<%= @items.count %>件</h2>
       <table class="table">
         <% @items.each do |item| %>
           <tr>
-            <td><%= attachment_image_tag item, :image, size: '80x60', fallback: 'no_image.jpg' %></td>
-            <td><%= item.item_name %></td>
-            <td><%= item.description %></td>
-            <td>￥<%= (item.non_taxed_price * 1.1).round %>  (税込)</td>
+            <td>
+              <%= link_to items_path do %>
+                <%= form_tag(items_path, :method => 'get') do %>
+                  <%= item.genre.name %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <%= attachment_image_tag item, :image, size: '80x60', fallback: 'no_image.jpg' %>
+            </td>
+            <td>
+              <%= item.item_name %>
+            </td>
+            <td>
+              <%= item.description %>
+            </td>
+            <td>
+              ￥<%= (item.non_taxed_price * 1.1).round %>  (税込)
+            </td>
             <td>
               <% if item.sale_status == true %>
                 販売中
