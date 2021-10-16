@@ -1,7 +1,11 @@
 class ItemsController < ApplicationController
 
   def index
-    @items = Item.search(params[:search])
+    if params[:search_key].present? # ジャンル検索したかどうか
+      @items = Item.where(genre_id: params[:search_key])
+    else
+      @items = Item.all
+    end
   end
 
   def show
