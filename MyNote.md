@@ -140,7 +140,7 @@ https://qiita.com/jackie0922youhei/items/e83d67d521ab10a86f23
 
 
 
-検索機能
+検索機能・ジャンル検索機能
 
 
 form_for・・・ modelに基づいたformを作成する
@@ -150,3 +150,16 @@ form_tag・・・modelに基づかないformを作成する
 text_field_tagはform_tagとセットで使うことが多い
 
 https://www.for-engineer.life/entry/rails-search-form/
+
+
+
+商品画面一覧のジャンル名をクリックすると、商品画面一覧にそのジャンルの商品だけが表示されるようにする方法
+
+<%= link_to item.genre.name, items_path(:search_key => item.genre_id) %>
+
+hoge_path(:キー => "値")
+itemモデルのFKであるgenre_idカラムは整数型(integer)のため、ダブルクォーテーションは不要
+
+resourcesメソッドのindex(一覧)であっても、この記述方法であれば引数取ること可能
+
+https://qiita.com/ATORA1992/items/566d76a7092bff40df4c
