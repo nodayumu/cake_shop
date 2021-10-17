@@ -34,11 +34,27 @@ Item.create!(
 )
 
 Item.create!(
+ genre_id: 1,
+ item_name: 'チョコレートクッキー',
+ description: '大好評です',
+ image: open('./app/assets/images/chocolate_cookies.jpeg'),
+ non_taxed_price: 140
+)
+
+Item.create!(
   genre_id: 2,
   item_name: 'マスタードプリン',
   description: '人気です',
   image: open('./app/assets/images/puding.jpg'),
-  non_taxed_price: 140
+  non_taxed_price: 150
+)
+
+Item.create!(
+  genre_id: 2,
+  item_name: 'ココアプリン',
+  description: 'リピート率No.1商品',
+  image: open('./app/assets/images/cocoa_puding.jpg'),
+  non_taxed_price: 160
 )
 
 Item.create!(
@@ -46,7 +62,15 @@ Item.create!(
   item_name: 'ソーダ',
   description: '期間限定商品です',
   image: open('./app/assets/images/soda.jpg'),
-  non_taxed_price: 150
+  non_taxed_price: 170
+)
+
+Item.create!(
+  genre_id: 3,
+  item_name: 'オレンジジュース',
+  description: '果汁100％です',
+  image: open('./app/assets/images/orange_juice.jpg'),
+  non_taxed_price: 180
 )
 
 
