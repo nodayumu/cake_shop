@@ -162,4 +162,5 @@ itemモデルのFKであるgenre_idカラムは整数型(integer)のため、ダ
 
 resourcesメソッドのindex(一覧)であっても、この記述方法であれば引数取ること可能
 
+Railsのlink_toでparamsを飛ばす方法
 https://qiita.com/ATORA1992/items/566d76a7092bff40df4c
