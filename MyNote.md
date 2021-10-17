@@ -1,4 +1,4 @@
-ER図・テーブル定義書・詳細設計
+## ER図・テーブル定義書・詳細設計
 
 
 boolean型は接頭辞にis_を付けることが多い。 yes/noで見分けられるものだから。
@@ -14,7 +14,7 @@ is_形容詞    (例) t.boolean :is_active, default: true, null: false
 
 
 
-認証機能・アカウント管理機能
+## 認証機能・アカウント管理機能
 
 
 deviseを使用して管理者と会員それぞれのコントローラーを作成
@@ -76,8 +76,19 @@ https://qiita.com/ryosuketter/items/9240d8c2561b5989f049
 
 
 
+seedの書き方いろいろ
+https://qiita.com/takehanKosuke/items/79a66751fe95010ea5ee
 
-カート・注文機能
+refileでのimage_idカラムに対してimagesフォルダの中の画像を選択したい場合
+image: open('./app/assets/images/soda.jpg')
+
+記事漁っていたら、こんな書き方もあった
+image: File.open('./app/assets/images/hoge.png')
+
+
+
+
+## カート・注文機能
 
 
 フォーム内のプルダウン表記でステータスを変更できるようにする
@@ -140,7 +151,7 @@ https://qiita.com/jackie0922youhei/items/e83d67d521ab10a86f23
 
 
 
-検索機能・ジャンル検索機能
+## 検索機能・ジャンル検索機能
 
 
 form_for・・・ modelに基づいたformを作成する
