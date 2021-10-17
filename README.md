@@ -14,3 +14,6 @@ https://gitlab.com/noda.ayumu.infratop/NaganoCake
 
 ## GitHub
 https://github.com/nodayumu/cake_shop
+
+## Qiita
+https://qiita.com/na_na
